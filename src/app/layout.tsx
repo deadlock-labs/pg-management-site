@@ -15,10 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased bg-gray-50 min-h-screen">
+      <body className="antialiased bg-stripe-bg min-h-screen text-stripe-text">
         <Providers>
           <Navbar />
-          <main>{children}</main>
+          <main className="min-h-[calc(100vh-3.5rem)]">{children}</main>
         </Providers>
       </body>
     </html>

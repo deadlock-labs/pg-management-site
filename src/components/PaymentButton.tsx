@@ -87,7 +87,7 @@ export default function PaymentButton({ billShareId, amount, userName, userEmail
           }
         },
         prefill: { name: userName, email: userEmail },
-        theme: { color: "#4F46E5" },
+        theme: { color: "#635bff" },
       };
 
       const rzp = new window.Razorpay(options);
@@ -101,8 +101,9 @@ export default function PaymentButton({ billShareId, amount, userName, userEmail
 
   if (status === "success") {
     return (
-      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-700">
-        ✓ Paid
+      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-stripe-success-light text-stripe-success">
+        <svg className="w-3.5 h-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+        Paid
       </span>
     );
   }
@@ -112,12 +113,12 @@ export default function PaymentButton({ billShareId, amount, userName, userEmail
       <button
         onClick={handlePayment}
         disabled={loading}
-        className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 disabled:opacity-50 transition"
+        className="bg-stripe-primary text-white px-4 py-2 rounded-lg text-[13px] font-medium hover:bg-stripe-primary-hover disabled:opacity-50 transition-colors shadow-sm"
       >
         {loading ? "Processing..." : `Pay ₹${amount.toFixed(2)}`}
       </button>
       {status === "error" && (
-        <p className="text-red-500 text-xs mt-1">Payment failed. Try again.</p>
+        <p className="text-stripe-danger text-[12px] mt-1">Payment failed. Try again.</p>
       )}
     </div>
   );

@@ -13,8 +13,11 @@ export default async function BillTypesPage() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-8">Bill Types</h1>
+    <div className="max-w-screen-xl mx-auto px-6 py-8">
+      <div className="mb-8">
+        <h1 className="text-[22px] font-semibold text-stripe-text">Bill Types</h1>
+        <p className="text-[13px] text-stripe-text-secondary mt-1">Define categories for your bills</p>
+      </div>
       <BillTypeManager billTypes={JSON.parse(JSON.stringify(billTypes))} />
     </div>
   );

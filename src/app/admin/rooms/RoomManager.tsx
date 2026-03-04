@@ -142,10 +142,10 @@ export default function RoomManager({ rooms, users }: RoomManagerProps) {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <p className="text-gray-500">{rooms.length} room(s)</p>
+        <p className="text-[13px] text-stripe-text-secondary">{rooms.length} room(s)</p>
         <button
           onClick={() => { resetForm(); setShowForm(true); }}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition"
+          className="bg-stripe-primary text-white px-4 py-2 rounded-lg text-[13px] font-medium hover:bg-stripe-primary-hover transition-colors shadow-sm"
         >
           + Add Room
         </button>
@@ -154,51 +154,51 @@ export default function RoomManager({ rooms, users }: RoomManagerProps) {
       {/* Room Form Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <div className="bg-stripe-card rounded-lg border border-stripe-border p-6 w-full max-w-md shadow-lg">
+            <h2 className="text-[15px] font-semibold text-stripe-text mb-4">
               {editingRoom ? "Edit Room" : "Add Room"}
             </h2>
             {error && (
-              <div className="bg-red-50 text-red-600 text-sm p-3 rounded-lg mb-4">{error}</div>
+              <div className="bg-stripe-danger-light text-stripe-danger text-[13px] p-3 rounded-lg mb-4">{error}</div>
             )}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Room Name</label>
+                <label className="block text-[13px] font-medium text-stripe-text mb-1">Room Name</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+                  className="w-full px-3 py-2 text-[14px] border border-stripe-border rounded-lg focus:ring-2 focus:ring-stripe-primary/20 focus:border-stripe-primary outline-none transition-colors bg-white"
                   placeholder="Room 101"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Floor</label>
+                  <label className="block text-[13px] font-medium text-stripe-text mb-1">Floor</label>
                   <input
                     type="number"
                     value={floor}
                     onChange={(e) => setFloor(parseInt(e.target.value))}
                     min={1}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+                    className="w-full px-3 py-2 text-[14px] border border-stripe-border rounded-lg focus:ring-2 focus:ring-stripe-primary/20 focus:border-stripe-primary outline-none transition-colors bg-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Capacity</label>
+                  <label className="block text-[13px] font-medium text-stripe-text mb-1">Capacity</label>
                   <input
                     type="number"
                     value={capacity}
                     onChange={(e) => setCapacity(parseInt(e.target.value))}
                     min={1}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+                    className="w-full px-3 py-2 text-[14px] border border-stripe-border rounded-lg focus:ring-2 focus:ring-stripe-primary/20 focus:border-stripe-primary outline-none transition-colors bg-white"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Rent Amount (₹)</label>
+                <label className="block text-[13px] font-medium text-stripe-text mb-1">Rent Amount (₹)</label>
                 <input
                   type="number"
                   value={rentAmount}
@@ -206,21 +206,21 @@ export default function RoomManager({ rooms, users }: RoomManagerProps) {
                   min={0}
                   step="0.01"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+                  className="w-full px-3 py-2 text-[14px] border border-stripe-border rounded-lg focus:ring-2 focus:ring-stripe-primary/20 focus:border-stripe-primary outline-none transition-colors bg-white"
                 />
               </div>
               <div className="flex gap-3 justify-end">
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                  className="px-4 py-2 text-[13px] font-medium text-stripe-text border border-stripe-border rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 transition"
+                  className="bg-stripe-primary text-white px-4 py-2 rounded-lg text-[13px] font-medium hover:bg-stripe-primary-hover disabled:opacity-50 transition-colors shadow-sm"
                 >
                   {loading ? "Saving..." : editingRoom ? "Update" : "Create"}
                 </button>
@@ -233,25 +233,25 @@ export default function RoomManager({ rooms, users }: RoomManagerProps) {
       {/* Occupant Management Modal */}
       {managingOccupants && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <div className="bg-stripe-card rounded-lg border border-stripe-border p-6 w-full max-w-md shadow-lg">
+            <h2 className="text-[15px] font-semibold text-stripe-text mb-4">
               Manage Occupants — {managingOccupants.name}
             </h2>
 
             <div className="mb-4">
-              <h3 className="text-sm font-medium text-gray-700 mb-2">Current Occupants</h3>
+              <h3 className="text-[13px] font-medium text-stripe-text mb-2">Current Occupants</h3>
               {managingOccupants.occupants.length === 0 ? (
-                <p className="text-sm text-gray-400">No occupants</p>
+                <p className="text-[13px] text-stripe-text-secondary">No occupants</p>
               ) : (
                 <ul className="space-y-2">
                   {managingOccupants.occupants.map((occ) => (
-                    <li key={occ.id} className="flex items-center justify-between bg-gray-50 px-3 py-2 rounded-lg">
-                      <span className="text-sm text-gray-700">
+                    <li key={occ.id} className="flex items-center justify-between bg-stripe-bg px-3 py-2 rounded-lg border border-stripe-border">
+                      <span className="text-[14px] text-stripe-text">
                         {occ.user.name || occ.user.email}
                       </span>
                       <button
                         onClick={() => removeOccupant(managingOccupants.id, occ.userId)}
-                        className="text-red-500 hover:text-red-700 text-sm"
+                        className="text-[13px] font-medium text-stripe-danger hover:text-stripe-danger"
                       >
                         Remove
                       </button>
@@ -263,12 +263,12 @@ export default function RoomManager({ rooms, users }: RoomManagerProps) {
 
             {availableUsers.length > 0 && managingOccupants.occupants.length < managingOccupants.capacity && (
               <div className="mb-4">
-                <h3 className="text-sm font-medium text-gray-700 mb-2">Add Occupant</h3>
+                <h3 className="text-[13px] font-medium text-stripe-text mb-2">Add Occupant</h3>
                 <select
                   onChange={(e) => {
                     if (e.target.value) addOccupant(managingOccupants.id, e.target.value);
                   }}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+                  className="w-full px-3 py-2 text-[14px] border border-stripe-border rounded-lg focus:ring-2 focus:ring-stripe-primary/20 focus:border-stripe-primary outline-none transition-colors bg-white"
                   defaultValue=""
                 >
                   <option value="" disabled>Select a user...</option>
@@ -284,7 +284,7 @@ export default function RoomManager({ rooms, users }: RoomManagerProps) {
             <div className="flex justify-end">
               <button
                 onClick={() => setManagingOccupants(null)}
-                className="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                className="px-4 py-2 text-[13px] font-medium text-stripe-text border border-stripe-border rounded-lg hover:bg-gray-50 transition-colors"
               >
                 Close
               </button>
@@ -294,28 +294,28 @@ export default function RoomManager({ rooms, users }: RoomManagerProps) {
       )}
 
       {/* Room Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {rooms.map((room) => (
-          <div key={room.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div key={room.id} className="bg-stripe-card rounded-lg border border-stripe-border p-5">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">{room.name}</h3>
-              <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">
+              <h3 className="text-[15px] font-semibold text-stripe-text">{room.name}</h3>
+              <span className="text-[12px] bg-stripe-primary-light text-stripe-primary px-2 py-0.5 rounded-full font-medium">
                 Floor {room.floor}
               </span>
             </div>
-            <div className="space-y-2 text-sm text-gray-600">
+            <div className="space-y-2 text-[14px] text-stripe-text-secondary">
               <p>
-                Capacity: <span className="font-medium">{room.occupants.length}/{room.capacity}</span>
+                Capacity: <span className="font-medium text-stripe-text">{room.occupants.length}/{room.capacity}</span>
               </p>
               <p>
-                Rent: <span className="font-medium">₹{room.rentAmount.toFixed(2)}</span>
+                Rent: <span className="font-medium text-stripe-text">₹{room.rentAmount.toFixed(2)}</span>
               </p>
               {room.occupants.length > 0 && (
                 <div>
-                  <p className="font-medium text-gray-700 mb-1">Occupants:</p>
+                  <p className="font-medium text-stripe-text mb-1 text-[13px]">Occupants:</p>
                   <ul className="space-y-1">
                     {room.occupants.map((occ) => (
-                      <li key={occ.id} className="text-gray-500">
+                      <li key={occ.id} className="text-[13px] text-stripe-text-secondary">
                         • {occ.user.name || occ.user.email}
                       </li>
                     ))}
@@ -323,22 +323,22 @@ export default function RoomManager({ rooms, users }: RoomManagerProps) {
                 </div>
               )}
             </div>
-            <div className="mt-4 flex gap-2">
+            <div className="mt-4 pt-4 border-t border-stripe-border flex gap-2">
               <button
                 onClick={() => setManagingOccupants(room)}
-                className="flex-1 text-center px-3 py-2 text-sm bg-indigo-50 text-indigo-700 rounded-lg hover:bg-indigo-100 transition"
+                className="flex-1 text-center px-3 py-2 text-[13px] font-medium bg-stripe-primary-light text-stripe-primary rounded-lg hover:bg-stripe-primary/10 transition-colors"
               >
                 Occupants
               </button>
               <button
                 onClick={() => openEdit(room)}
-                className="px-3 py-2 text-sm text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                className="px-3 py-2 text-[13px] font-medium text-stripe-text border border-stripe-border rounded-lg hover:bg-gray-50 transition-colors"
               >
                 Edit
               </button>
               <button
                 onClick={() => handleDelete(room.id)}
-                className="px-3 py-2 text-sm text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition"
+                className="px-3 py-2 text-[13px] font-medium text-stripe-danger border border-stripe-danger/20 rounded-lg hover:bg-stripe-danger-light transition-colors"
               >
                 Delete
               </button>
@@ -348,9 +348,9 @@ export default function RoomManager({ rooms, users }: RoomManagerProps) {
       </div>
 
       {rooms.length === 0 && (
-        <div className="text-center py-12 text-gray-500">
-          <p className="text-4xl mb-4">🏠</p>
-          <p>No rooms yet. Add your first room to get started.</p>
+        <div className="text-center py-12">
+          <svg className="w-10 h-10 text-stripe-text-secondary mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
+          <p className="text-[14px] text-stripe-text-secondary">No rooms yet. Add your first room to get started.</p>
         </div>
       )}
     </div>
