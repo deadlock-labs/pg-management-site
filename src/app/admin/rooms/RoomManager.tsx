@@ -121,12 +121,12 @@ export default function RoomManager({ rooms, users }: RoomManagerProps) {
     }
   };
 
-  const removeOccupant = async (roomId: string, occupantId: string) => {
+  const removeOccupant = async (roomId: string, userId: string) => {
     try {
       const res = await fetch(`/api/rooms/${roomId}/occupants`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ occupantId }),
+        body: JSON.stringify({ userId }),
       });
       if (!res.ok) throw new Error("Failed to remove occupant");
       router.refresh();
@@ -250,7 +250,7 @@ export default function RoomManager({ rooms, users }: RoomManagerProps) {
                         {occ.user.name || occ.user.email}
                       </span>
                       <button
-                        onClick={() => removeOccupant(managingOccupants.id, occ.id)}
+                        onClick={() => removeOccupant(managingOccupants.id, occ.userId)}
                         className="text-red-500 hover:text-red-700 text-sm"
                       >
                         Remove

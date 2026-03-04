@@ -26,3 +26,18 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json(billType, { status: 201 });
 }
+
+export async function DELETE(request: NextRequest) {
+  const session = await auth();
+  if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (session.user.role !== "admin") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+
+  if (!id) return NextResponse.json({ error: "ID required" }, { status: 400 });
+
+  await prisma.billType.delete({ where: { id } });
+
+  return NextResponse.json({ success: true });
+}
