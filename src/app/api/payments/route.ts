@@ -14,6 +14,7 @@ export async function POST(request: NextRequest) {
   });
 
   if (!billShare) return NextResponse.json({ error: "Bill share not found" }, { status: 404 });
+  if (billShare.userId !== session.user.id) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   if (billShare.isPaid) return NextResponse.json({ error: "Already paid" }, { status: 400 });
 
   const instance = new Razorpay({

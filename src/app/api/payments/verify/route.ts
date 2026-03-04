@@ -15,7 +15,13 @@ export async function POST(request: NextRequest) {
     .update(body)
     .digest("hex");
 
-  if (expectedSignature !== razorpay_signature) {
+  if (
+    expectedSignature.length !== razorpay_signature.length ||
+    !crypto.timingSafeEqual(
+      Buffer.from(expectedSignature),
+      Buffer.from(razorpay_signature)
+    )
+  ) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
@@ -24,6 +30,7 @@ export async function POST(request: NextRequest) {
   });
 
   if (!payment) return NextResponse.json({ error: "Payment not found" }, { status: 404 });
+  if (payment.userId !== session.user.id) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   await prisma.$transaction([
     prisma.payment.update({
