@@ -8,10 +8,14 @@ import { prisma } from "@/lib/prisma";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
+    ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+      ? [
+          Google({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+          }),
+        ]
+      : []),
     Credentials({
       name: "credentials",
       credentials: {
@@ -47,11 +51,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: user.email! },
-        });
-        token.role = dbUser?.role || "user";
-        token.id = dbUser?.id || user.id;
+        // For credentials login, role is set in authorize callback
+        const role = (user as { role?: string }).role;
+        if (role) {
+          token.role = role;
+          token.id = user.id;
+        } else {
+          // For OAuth logins, look up role from database
+          const dbUser = await prisma.user.findUnique({
+            where: { email: user.email! },
+          });
+          token.role = dbUser?.role || "user";
+          token.id = dbUser?.id || user.id;
+        }
       }
       return token;
     },

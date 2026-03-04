@@ -27,7 +27,7 @@ export async function sendBillNotification(
   }
 
   const mailOptions = {
-    from: process.env.EMAIL_FROM || "noreply@pgmanagement.com",
+    from: process.env.EMAIL_FROM || process.env.SMTP_USER || "noreply@pgmanagement.com",
     to: toEmail,
     subject: `New ${billType} Bill Added - ₹${amount.toFixed(2)}`,
     html: `
